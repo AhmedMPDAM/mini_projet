@@ -1,0 +1,632 @@
+/* src/components/leave/LeaveRequestForm.css */
+/* Premium leave request form styles */
+
+/* =========================================================
+   Custom react-datepicker overrides for dark mode
+   ========================================================= */
+.react-datepicker-wrapper {
+  width: 100%;
+}
+
+.react-datepicker__input-container input {
+  width: 100%;
+  padding: 14px 14px 14px 44px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: #f1f5f9;
+  font-size: 15px;
+  font-family: inherit;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  outline: none;
+  box-sizing: border-box;
+}
+
+.react-datepicker__input-container input::placeholder {
+  color: rgba(148, 163, 184, 0.5);
+}
+
+.react-datepicker__input-container input:focus {
+  border-color: #6366f1;
+  background: rgba(99, 102, 241, 0.1);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+
+.react-datepicker {
+  font-family: 'Inter', sans-serif !important;
+  background: #1e1e3a !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 16px !important;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4) !important;
+  overflow: hidden;
+}
+
+.react-datepicker__header {
+  background: rgba(99, 102, 241, 0.15) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  padding-top: 12px !important;
+}
+
+.react-datepicker__current-month,
+.react-datepicker__day-name {
+  color: #f1f5f9 !important;
+}
+
+.react-datepicker__day {
+  color: #cbd5e1 !important;
+  border-radius: 8px !important;
+}
+
+.react-datepicker__day:hover {
+  background: rgba(99, 102, 241, 0.3) !important;
+  color: #fff !important;
+}
+
+.react-datepicker__day--selected,
+.react-datepicker__day--in-range {
+  background: #6366f1 !important;
+  color: #fff !important;
+}
+
+.react-datepicker__day--keyboard-selected {
+  background: rgba(99, 102, 241, 0.4) !important;
+}
+
+.react-datepicker__day--disabled {
+  color: rgba(148, 163, 184, 0.3) !important;
+}
+
+.react-datepicker__day--weekend {
+  color: rgba(239, 68, 68, 0.5) !important;
+}
+
+.react-datepicker__navigation-icon::before {
+  border-color: #94a3b8 !important;
+}
+
+.react-datepicker__triangle {
+  display: none !important;
+}
+
+/* =========================================================
+   Leave Request Page Layout
+   ========================================================= */
+.leave-request-page {
+  min-height: 100vh;
+  background: #0f0f23;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.leave-request-page .page-header {
+  text-align: center;
+  margin-bottom: 32px;
+  animation: fadeInDown 0.5s ease;
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.leave-request-page .page-header h1 {
+  font-family: 'Inter', sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: #f1f5f9;
+  margin: 0 0 8px;
+  letter-spacing: -0.02em;
+}
+
+.leave-request-page .page-header p {
+  color: #94a3b8;
+  font-size: 15px;
+  margin: 0;
+}
+
+/* =========================================================
+   Balance Cards Row
+   ========================================================= */
+.balance-cards {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 32px;
+  max-width: 800px;
+  width: 100%;
+  animation: fadeInDown 0.6s ease;
+}
+
+.balance-card {
+  flex: 1;
+  min-width: 110px;
+  max-width: 150px;
+  padding: 16px 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.balance-card:hover {
+  background: rgba(255, 255, 255, 0.07);
+  transform: translateY(-2px);
+}
+
+.balance-card .balance-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: #6366f1;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.balance-card .balance-value.low {
+  color: #f59e0b;
+}
+
+.balance-card .balance-value.empty {
+  color: #ef4444;
+}
+
+.balance-card .balance-label {
+  font-size: 11px;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+.balance-card .balance-max {
+  font-size: 11px;
+  color: rgba(148, 163, 184, 0.5);
+  margin-top: 2px;
+}
+
+/* =========================================================
+   Form Card (Glassmorphism)
+   ========================================================= */
+.leave-form-card {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* =========================================================
+   Form Groups
+   ========================================================= */
+.leave-form .form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.leave-form .form-group {
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.leave-form .form-group label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #94a3b8;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.leave-form .input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.leave-form .input-icon {
+  position: absolute;
+  left: 14px;
+  width: 18px;
+  height: 18px;
+  color: #94a3b8;
+  transition: color 0.3s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.leave-form select,
+.leave-form textarea {
+  width: 100%;
+  padding: 14px 14px 14px 44px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: #f1f5f9;
+  font-size: 15px;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  outline: none;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.leave-form select {
+  cursor: pointer;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 16px;
+  padding-right: 40px;
+}
+
+.leave-form select option {
+  background: #1e1e3a;
+  color: #f1f5f9;
+}
+
+.leave-form textarea {
+  min-height: 100px;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+.leave-form select:focus,
+.leave-form textarea:focus {
+  border-color: #6366f1;
+  background-color: rgba(99, 102, 241, 0.1);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+
+/* Error state */
+.leave-form .form-group.has-error select,
+.leave-form .form-group.has-error textarea,
+.leave-form .form-group.has-error .react-datepicker__input-container input {
+  border-color: #ef4444;
+  background: rgba(239, 68, 68, 0.08);
+}
+
+.leave-form .field-error {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+  font-size: 13px;
+  color: #ef4444;
+  animation: shakeIn 0.3s ease;
+}
+
+@keyframes shakeIn {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+
+/* =========================================================
+   Computed Days Badge
+   ========================================================= */
+.days-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background: rgba(99, 102, 241, 0.12);
+  border: 1px solid rgba(99, 102, 241, 0.25);
+  border-radius: 12px;
+  margin-bottom: 20px;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.days-badge .days-number {
+  font-size: 24px;
+  font-weight: 700;
+  color: #818cf8;
+}
+
+.days-badge .days-label {
+  font-size: 13px;
+  color: #94a3b8;
+  line-height: 1.3;
+}
+
+.days-badge.warning {
+  background: rgba(245, 158, 11, 0.12);
+  border-color: rgba(245, 158, 11, 0.25);
+}
+
+.days-badge.warning .days-number {
+  color: #f59e0b;
+}
+
+/* =========================================================
+   File Upload Area
+   ========================================================= */
+.upload-area {
+  border: 2px dashed rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  padding: 28px 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.upload-area:hover {
+  border-color: rgba(99, 102, 241, 0.4);
+  background: rgba(99, 102, 241, 0.05);
+}
+
+.upload-area.dragover {
+  border-color: #6366f1;
+  background: rgba(99, 102, 241, 0.1);
+  transform: scale(1.01);
+}
+
+.upload-area.has-file {
+  border-color: rgba(34, 197, 94, 0.3);
+  background: rgba(34, 197, 94, 0.05);
+}
+
+.upload-area input[type="file"] {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.upload-area .upload-icon {
+  width: 40px;
+  height: 40px;
+  margin: 0 auto 12px;
+  color: #64748b;
+  transition: color 0.3s ease;
+}
+
+.upload-area:hover .upload-icon {
+  color: #6366f1;
+}
+
+.upload-area .upload-text {
+  font-size: 14px;
+  color: #94a3b8;
+  margin-bottom: 4px;
+}
+
+.upload-area .upload-text strong {
+  color: #6366f1;
+}
+
+.upload-area .upload-hint {
+  font-size: 12px;
+  color: rgba(148, 163, 184, 0.5);
+}
+
+/* File preview */
+.file-preview {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  margin-top: 12px;
+}
+
+.file-preview .file-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: rgba(99, 102, 241, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.file-preview .file-icon svg {
+  width: 18px;
+  height: 18px;
+  color: #818cf8;
+}
+
+.file-preview .file-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.file-preview .file-name {
+  font-size: 13px;
+  color: #f1f5f9;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.file-preview .file-size {
+  font-size: 11px;
+  color: #64748b;
+}
+
+.file-preview .remove-file {
+  background: none;
+  border: none;
+  color: #ef4444;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 6px;
+  transition: background 0.2s ease;
+  display: flex;
+}
+
+.file-preview .remove-file:hover {
+  background: rgba(239, 68, 68, 0.15);
+}
+
+.file-preview .remove-file svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* =========================================================
+   Submit Button
+   ========================================================= */
+.leave-form .submit-btn {
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: inherit;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  margin-top: 8px;
+}
+
+.leave-form .submit-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 30px -8px rgba(99, 102, 241, 0.5);
+}
+
+.leave-form .submit-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.leave-form .btn-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.leave-form .spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* =========================================================
+   Alert Messages
+   ========================================================= */
+.leave-form .alert {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 24px;
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.leave-form .alert-error {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  color: #fca5a5;
+}
+
+.leave-form .alert-success {
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.2);
+  color: #86efac;
+}
+
+.leave-form .alert svg {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  margin-top: 1px;
+}
+
+/* =========================================================
+   Back Link
+   ========================================================= */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #94a3b8;
+  font-size: 14px;
+  text-decoration: none;
+  margin-bottom: 24px;
+  transition: color 0.3s ease;
+}
+
+.back-link:hover {
+  color: #f1f5f9;
+}
+
+.back-link svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* =========================================================
+   Responsive
+   ========================================================= */
+@media (max-width: 600px) {
+  .leave-request-page {
+    padding: 20px 12px;
+  }
+
+  .leave-form-card {
+    padding: 24px 16px;
+    border-radius: 16px;
+  }
+
+  .leave-form .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .leave-request-page .page-header h1 {
+    font-size: 24px;
+  }
+
+  .balance-cards {
+    gap: 8px;
+  }
+
+  .balance-card {
+    min-width: 90px;
+    padding: 12px 8px;
+  }
+}

@@ -1,0 +1,298 @@
+/* src/components/calendar/TeamCalendar.css */
+/* Premium styles for FullCalendar integration in dark mode */
+
+/* =========================================================
+   Layout & Container
+   ========================================================= */
+.calendar-page-container {
+  min-height: 100vh;
+  background: #0f0f23;
+  padding: 32px 24px;
+  font-family: 'Inter', -apple-system, sans-serif;
+  color: #f1f5f9;
+  display: flex;
+  flex-direction: column;
+}
+
+.calendar-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.calendar-header-row h1 {
+  font-size: 28px;
+  font-weight: 700;
+  margin: 0 0 4px;
+  letter-spacing: -0.02em;
+}
+
+.calendar-header-row p {
+  color: #94a3b8;
+  font-size: 14px;
+  margin: 0;
+}
+
+.calendar-main-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+/* =========================================================
+   Legend & Sidebar
+   ========================================================= */
+.calendar-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.calendar-legend-card {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 20px;
+}
+
+.legend-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.legend-header h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.legend-count {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.legend-subtitle {
+  font-size: 12px;
+  color: #64748b;
+  margin: 0 0 16px 0;
+  line-height: 1.4;
+}
+
+.legend-items {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 400px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.legend-items::-webkit-scrollbar {
+  width: 4px;
+}
+.legend-items::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  color: #94a3b8;
+  font-family: inherit;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+
+.legend-item:hover {
+  background: rgba(255, 255, 255, 0.03);
+  color: #f1f5f9;
+}
+
+.legend-item.active {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.15);
+  color: #f1f5f9;
+  font-weight: 500;
+}
+
+.color-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  box-shadow: 0 0 10px currentColor; /* glow effect */
+}
+
+/* =========================================================
+   FullCalendar Dark Theme Overrides
+   ========================================================= */
+.fc-wrapper {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 20px;
+  min-height: 700px;
+}
+
+.fc-theme-standard .fc-scrollgrid {
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+.fc-theme-standard td, .fc-theme-standard th {
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+.fc-col-header-cell-cushion {
+  color: #94a3b8 !important;
+  font-weight: 500 !important;
+  text-transform: uppercase;
+  font-size: 13px;
+  padding: 12px 0 !important;
+}
+
+.fc-daygrid-day-number {
+  color: #cbd5e1 !important;
+  font-size: 14px;
+  padding: 8px !important;
+}
+
+.fc-day-today {
+  background: rgba(99, 102, 241, 0.05) !important;
+}
+
+.fc-day-other .fc-daygrid-day-number {
+  color: #475569 !important;
+}
+
+/* Calendar Button Styling */
+.fc .fc-button-primary {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  color: #f1f5f9 !important;
+  text-transform: capitalize;
+  border-radius: 8px !important;
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 500 !important;
+  transition: all 0.2s ease !important;
+}
+
+.fc .fc-button-primary:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.fc .fc-button-primary:active,
+.fc .fc-button-primary.fc-button-active {
+  background: #6366f1 !important;
+  border-color: #6366f1 !important;
+  color: #fff !important;
+}
+
+.fc-toolbar-title {
+  color: #f1f5f9 !important;
+  font-size: 20px !important;
+  font-weight: 700 !important;
+}
+
+/* =========================================================
+   Event Styling (Conflict Badge)
+   ========================================================= */
+.fc-event {
+  border-radius: 6px !important;
+  padding: 2px 6px !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  border-width: 1px !important;
+  border-style: solid !important;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.fc-event:hover {
+  transform: translateY(-1px);
+  opacity: 0.95;
+}
+
+.custom-event-content {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.conflict-indicator {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  background: #ef4444;
+  color: white;
+  border-radius: 50%;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.3);
+  animation: pulse-red 2s infinite;
+}
+
+@keyframes pulse-red {
+  0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+  70% { box-shadow: 0 0 0 4px rgba(239, 68, 68, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
+
+.event-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.status-indicator-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.status-indicator-dot.pending { background: #fbbf24; } /* Amber */
+.status-indicator-dot.modification_requested { background: #818cf8; } /* Indigo */
+/* Approved requires no extra dot, default assumed */
+
+
+/* =========================================================
+   Responsive
+   ========================================================= */
+@media (max-width: 900px) {
+  .calendar-main-layout {
+    grid-template-columns: 1fr;
+  }
+  
+  .fc-wrapper {
+    min-height: 500px;
+  }
+  
+  .fc-toolbar {
+    flex-direction: column;
+    gap: 12px;
+  }
+}

@@ -1,0 +1,175 @@
+/* src/components/leave/RequestTimeline.css */
+/* Premium CSS for the vertical timeline trace */
+
+.timeline-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 16px 0;
+}
+
+.timeline-item {
+  display: flex;
+  gap: 16px;
+  position: relative;
+  padding-bottom: 24px;
+}
+
+/* Hide the connecting line on the last item */
+.timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+.timeline-item:last-child .timeline-line {
+  display: none;
+}
+
+/* Visual left col: Icon and connecting line */
+.timeline-visual {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 32px;
+  flex-shrink: 0;
+}
+
+.timeline-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  box-shadow: 0 0 0 2px #0f0f23;
+}
+
+.timeline-line {
+  width: 2px;
+  flex-grow: 1;
+  background: rgba(255, 255, 255, 0.1);
+  margin-top: 4px;
+}
+
+/* Content block */
+.timeline-content {
+  flex-grow: 1;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  padding: 14px 16px;
+  transition: all 0.2s ease;
+}
+
+.timeline-content:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.timeline-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.timeline-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #f1f5f9;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.timeline-title .actor-role {
+  padding: 2px 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  font-size: 10px;
+  text-transform: uppercase;
+  color: #94a3b8;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.timeline-timestamp {
+  font-size: 12px;
+  color: #64748b;
+  white-space: nowrap;
+}
+
+.timeline-comment {
+  font-size: 13px;
+  color: #cbd5e1;
+  line-height: 1.5;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 8px 12px;
+  border-radius: 8px;
+  border-left: 2px solid transparent; /* Colored based on event */
+}
+
+/* Status-specific mapping styles */
+.event-created .timeline-icon {
+  background: #3b82f6;
+  color: #fff;
+}
+.event-created .timeline-comment {
+  border-left-color: #3b82f6;
+}
+
+.event-pending .timeline-icon {
+  background: #fbbf24;
+  color: #0f0f23;
+}
+.event-pending .timeline-comment {
+  border-left-color: #fbbf24;
+}
+
+.event-approved .timeline-icon {
+  background: #22c55e;
+  color: #fff;
+}
+.event-approved .timeline-comment {
+  border-left-color: #22c55e;
+}
+
+.event-rejected .timeline-icon {
+  background: #ef4444;
+  color: #fff;
+}
+.event-rejected .timeline-comment {
+  border-left-color: #ef4444;
+}
+
+.event-modification_requested .timeline-icon {
+  background: #8b5cf6;
+  color: #fff;
+}
+.event-modification_requested .timeline-comment {
+  border-left-color: #8b5cf6;
+}
+
+.event-cancelled .timeline-icon {
+  background: #64748b;
+  color: #fff;
+}
+.event-cancelled .timeline-comment {
+  border-left-color: #64748b;
+}
+
+/* Empty State / Loading State */
+.timeline-empty {
+  text-align: center;
+  padding: 30px;
+  color: #64748b;
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+}
