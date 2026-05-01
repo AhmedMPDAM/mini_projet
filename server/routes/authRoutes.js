@@ -5,6 +5,7 @@
 const express = require('express');
 const router = express.Router();
 const {
+  register,
   login,
   refreshAccessToken,
   logout,
@@ -16,6 +17,11 @@ const { verifyToken } = require('../middleware/authMiddleware');
 // =============================================================
 // Public routes – no authentication required
 // =============================================================
+
+// POST /api/auth/register
+// Body: { firstName, lastName, email, password }
+// Returns: { user, accessToken } + sets refreshToken cookie
+router.post('/register', register);
 
 // POST /api/auth/login
 // Body: { email: string, password: string }

@@ -4,7 +4,7 @@
 
 import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 import './LoginForm.css';
 
@@ -14,7 +14,7 @@ const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [mode, setMode] = useState('login'); // 'login' | 'forgot'
   const [forgotSuccess, setForgotSuccess] = useState(false);
-  
+
   // Also redirect automatically if already authenticated
   useEffect(() => {
     if (isAuthenticated) {
@@ -235,8 +235,8 @@ const LoginForm = () => {
               </span>
             </button>
 
-            {/* Forgot password link */}
-            <div className="login-footer">
+            {/* Footer with links */}
+            <div className="login-footer" style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
               <button
                 type="button"
                 className="forgot-link"
@@ -245,6 +245,12 @@ const LoginForm = () => {
               >
                 Forgot your password?
               </button>
+              <div>
+                <span style={{ color: '#94a3b8' }}>Don't have an account? </span>
+                <Link to="/register" className="forgot-link" style={{ display: 'inline-block' }}>
+                  Sign up
+                </Link>
+              </div>
             </div>
           </form>
         )}

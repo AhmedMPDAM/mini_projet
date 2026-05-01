@@ -196,9 +196,27 @@ const createLeaveRequest = async (req, res) => {
 
     // Populate employee info for the response
     await leaveRequest.populate('employee', 'firstName lastName email');
-    
+
     // Inject the ID into req so the native auditMiddleware can spawn the background log
     req._auditTargetId = leaveRequest._id;
+
+    // =========================================================
+    // MAKE.COM AUTOMATION TRIGGER
+    // Send data to the Make.com webhook without blocking the response
+    // =========================================================
+    fetch(process.env.MAKE_COM_WEBHOOK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        employeeName: `${leaveRequest.employee.firstName} ${leaveRequest.employee.lastName}`,
+        employeeEmail: leaveRequest.employee.email,
+        leaveType: leaveRequest.leaveType,
+        startDate: leaveRequest.startDate,
+        endDate: leaveRequest.endDate,
+        businessDays: leaveRequest.businessDays,
+        reason: leaveRequest.reason
+      })
+    }).catch(err => console.error('Make.com webhook failed:', err));
 
     return res.status(201).json({
       success: true,

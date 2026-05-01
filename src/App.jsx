@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate } from 'r
 import { AuthProvider } from './hooks/useAuth';
 import useAuth from './hooks/useAuth';
 import LoginForm from './components/auth/LoginForm';
+import RegisterForm from './components/auth/RegisterForm';
 import LeaveRequestForm from './components/leave/LeaveRequestForm';
 import ManagerDashboard from './components/manager/ManagerDashboard';
 import TeamCalendar from './components/calendar/TeamCalendar';
@@ -149,6 +150,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/login" element={<LoginForm />} />
+          <Route path="/register" element={<RegisterForm />} />
           <Route
             path="/dashboard"
             element={

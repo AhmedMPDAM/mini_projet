@@ -9,6 +9,79 @@ const User = require('../models/User');
 const { sendResetEmail } = require('../utils/emailService');
 
 // =============================================================
+// POST /api/auth/register
+// Registers a new user and returns tokens
+// =============================================================
+const register = async (req, res) => {
+  try {
+    const { firstName, lastName, email, password } = req.body;
+
+    // --- Input validation ---
+    if (!firstName || !lastName || !email || !password) {
+      return res.status(400).json({
+        success: false,
+        message: 'First name, last name, email, and password are required.',
+      });
+    }
+
+    // Check if user already exists
+    const existingUser = await User.findOne({ email: email.toLowerCase() });
+    if (existingUser) {
+      // SECURITY: Returning "Email already in use" allows user enumeration
+      // but in signup forms it's common practice to explicitly tell the user. 
+      // If strict no-enumeration is required, you could just say "Registration failed"
+      // or send an email instead. For now, we return explicit error.
+      return res.status(400).json({
+        success: false,
+        message: 'Email is already registered.',
+      });
+    }
+
+    // Create new user (password is hashed automatically by pre-save hook)
+    const newUser = await User.create({
+      firstName,
+      lastName,
+      email: email.toLowerCase(),
+      password,
+    });
+
+    // Generate token pair
+    const { accessToken, refreshToken } = generateTokens(newUser);
+
+    // Hash refresh token and save
+    const refreshTokenHash = await bcrypt.hash(refreshToken, 10);
+    newUser.refreshToken = refreshTokenHash;
+    await newUser.save({ validateBeforeSave: false });
+
+    // Set refresh token in HttpOnly cookie
+    res.cookie('refreshToken', refreshToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict',
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+      path: '/api/auth',
+    });
+
+    // Return user data and access token
+    return res.status(201).json({
+      success: true,
+      message: 'Registration successful.',
+      data: {
+        user: newUser.toJSON(),
+        accessToken,
+      },
+    });
+  } catch (error) {
+    console.error('Register error:', error);
+    return res.status(500).json({
+      success: false,
+      message: 'An internal server error occurred.',
+    });
+  }
+};
+
+
+// =============================================================
 // Helper: Generate access & refresh token pair
 // =============================================================
 const generateTokens = (user) => {
@@ -396,6 +469,7 @@ const resetPassword = async (req, res) => {
 };
 
 module.exports = {
+  register,
   login,
   refreshAccessToken,
   logout,

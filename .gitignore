@@ -22,3 +22,11 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Environment variables
+server/.env
+server/.env.*
+
+# Uploads (user-generated files)
+uploads/
+server/uploads/

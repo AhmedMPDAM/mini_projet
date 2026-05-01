@@ -75,6 +75,31 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   // =============================================================
+  // signup – registers user and stores tokens
+  // =============================================================
+  const signup = useCallback(async (firstName, lastName, email, password) => {
+    try {
+      setError(null);
+      setLoading(true);
+
+      const { data } = await api.post('/auth/register', { firstName, lastName, email, password });
+
+      // Store the access token in localStorage
+      localStorage.setItem('accessToken', data.data.accessToken);
+      setUser(data.data.user);
+
+      return { success: true };
+    } catch (err) {
+      const message =
+        err.response?.data?.message || 'An error occurred during sign up.';
+      setError(message);
+      return { success: false, message };
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  // =============================================================
   // logout – clears the session and redirects
   // =============================================================
   const logout = useCallback(async () => {
@@ -141,6 +166,7 @@ export const AuthProvider = ({ children }) => {
     isManager,
     isEmployee,
     login,
+    signup,
     logout,
     forgotPassword,
     resetPassword,
@@ -159,7 +185,7 @@ const useAuth = () => {
   if (!context) {
     throw new Error(
       'useAuth must be used within an AuthProvider. ' +
-        'Wrap your component tree with <AuthProvider>.'
+      'Wrap your component tree with <AuthProvider>.'
     );
   }
 
